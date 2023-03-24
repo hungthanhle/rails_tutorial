@@ -5,19 +5,19 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     @base_title = "Ruby on Rails Tutorial Sample App"
   end
   test "should get home" do
-    get static_pages_home_url
+    get root_path
     assert_response :success
     assert_select "title", "Ruby on Rails Tutorial Sample App"
   end
 
   test "should get help" do
-    get static_pages_help_url
+    get helf_path
     assert_response :success
     assert_select "title", "Help | #{@base_title}"
   end
 
   test "should get about" do
-    get static_pages_about_url
+    get about_path
     assert_response :success
     assert_select "title", "About | #{@base_title}"
   end
@@ -25,5 +25,17 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   test "should get root" do
     get root_url
     assert_response :success
+  end
+
+  test "should get contact" do
+    get contact_path
+    assert_response :success
+    assert_select "title", "Contact | #{@base_title}"
+  end
+
+  test "full title helper" do
+    get helf_path
+    assert_equal full_title, "Ruby on Rails Tutorial Sample App"
+    assert_equal full_title("Help"), "Help | Ruby on Rails Tutorial Sample App"
   end
 end
