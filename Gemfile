@@ -45,6 +45,9 @@ gem "bootsnap", require: false
 # Bootstrap
 gem 'bootstrap-sass', '3.4.1'
 
+# Bcrypt
+gem 'bcrypt', '3.1.13'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
