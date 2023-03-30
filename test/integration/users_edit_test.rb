@@ -67,6 +67,11 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_equal name, @user.name
     assert_equal email, @user.email
   end
+
+  test "should redirect index when not logged in" do
+    get users_path
+    assert_redirected_to login_url
+  end
   # test "the truth" do
   #   assert true
   # end
