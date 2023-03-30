@@ -1,0 +1,44 @@
+GET http://localhost:3000/users
+
+### /sessions
+POST http://localhost:3000/login
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="session[email]"
+
+example@railstutorial.org
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="session[password]"
+
+foobar
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+POST http://localhost:3000/users
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="authenticity_token"
+
+vXa92BhW1eeNAhyWjslHPdbtannP3wPgZUv9dG-tDg7ZR0tbF4FU0LW6_boHUhh2DlF6fjbsrc5aBfzWehSvWw
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="user[name]"
+
+Example User
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="user[email]"
+
+example@railstutorial.org
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="user[password]"
+
+foobar
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="user[password_confirmation]"
+
+foobar
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="user[admin]"
+
+false
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

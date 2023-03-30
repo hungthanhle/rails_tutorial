@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy] #view middleware
   before_action :correct_user, only: [:edit, :update] #middleware
   before_action :admin_user, only: :destroy #middleware
