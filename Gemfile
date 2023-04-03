@@ -61,6 +61,12 @@ gem 'bootstrap-will_paginate', '1.0.0'
 
 gem 'rails-controller-testing'
 
+gem 'active_storage_validations', '0.8.9'
+
+gem 'image_processing', '1.9.3'
+
+gem 'mini_magick', '4.9.5'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
