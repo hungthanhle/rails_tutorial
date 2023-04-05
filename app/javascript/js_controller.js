@@ -1,1 +1,0 @@
-document.write('<html><body><h2>DÙNG JS XEM SAO</h2></body></html>');
