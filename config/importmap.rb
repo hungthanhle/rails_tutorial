@@ -5,8 +5,6 @@ pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers"
-pin "jquery", to: "https://ga.jspm.io/npm:jquery@3.6.4/dist/jquery.js"
-pin "jquery_ujs", to: "jquery_ujs.js", preload: true
-pin "popper", to: "popper.js", preload: true
-pin "bootstrap", to: "https://ga.jspm.io/npm:bootstrap@5.2.3/dist/js/bootstrap.esm.js"
-pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.7/lib/index.js"
+pin "jquery", to: "https://code.jquery.com/jquery-3.3.1.slim.min.js", preload: true
+pin "popper", to: "https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js", preload: true
+pin "bootstrap", to: "https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js", preload: true
