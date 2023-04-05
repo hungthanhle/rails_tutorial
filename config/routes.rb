@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # get 'password_resets/new'
   # get 'password_resets/edit'
+  get 'js', to: 'js#index'
   resources :password_resets, only: [:new, :create, :edit, :update]
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
