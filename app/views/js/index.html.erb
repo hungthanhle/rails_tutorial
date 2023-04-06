@@ -1,0 +1,17 @@
+<h2>This is a heading</h2>
+<p>This is a paragraph.</p>
+<p>This is another paragraph.</p>
+<%# <button>Click me to hide paragraphs</button> %>
+
+<p><b>userId:</b> <span id="A1"></span></p>
+<p><b>id:</b> <span id="A2"></span></p>
+<p><b>title:</b> <span id="A3"></span></p>
+<p><b>completed:</b> <span id="A4"></span></p>
+<p><b>Status:</b> <span id="A5"></span></p>
+<p><b>Response:</b> <span id="A6"></span></p>
+
+<button>Click to AJAX data</button>
+<a onclick="loadDoc()">Click to AJAX data</a>
+
+<%= javascript_include_tag 'js_controller.js' %>
+<%# <%= javascript_import_module_tag 'js_controller.js', 'data-turbo-track': 'reload' %>
