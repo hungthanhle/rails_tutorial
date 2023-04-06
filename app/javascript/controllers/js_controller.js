@@ -2,11 +2,40 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    document.write('<html><body><h2>This is a heading</h2><p>This is a paragraph.</p><p>This is another paragraph.</p><button>Click me to hide paragraphs</button></html>');
     $(document).ready(function(){
       $("button").click(function(){
-        $("p").hide();
+        // $("p").hide();
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+          console.log(this);
+          document.getElementById('A1').innerHTML = this.userId;
+          document.getElementById('A2').innerHTML = this.id;
+          document.getElementById('A3').innerHTML = this.title;
+          document.getElementById('A4').innerHTML = this.completed;
+          document.getElementById('A5').innerHTML = this.status;
+          document.getElementById('A6').innerHTML = this.response;
+        }
+        xhttp.open("GET", 'https://jsonplaceholder.typicode.com/todos/1');
+        xhttp.send();
       });
     });
+
+    console.log("Hello")
+
+    function loadDoc() {
+      const xhttp = new XMLHttpRequest();
+      xhttp.onload = function() {
+        console.log(this);
+        document.getElementById('A1').innerHTML = this.userId;
+        document.getElementById('A2').innerHTML = this.id;
+        document.getElementById('A3').innerHTML = this.title;
+        document.getElementById('A4').innerHTML = this.completed;
+        document.getElementById('A5').innerHTML = this.status;
+        document.getElementById('A6').innerHTML = this.response;
+      }
+      xhttp.open("GET", 'https://jsonplaceholder.typicode.com/todos/1');
+      xhttp.send();
+    }
   }
 }
