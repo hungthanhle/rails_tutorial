@@ -13,4 +13,5 @@
 <button>Click to AJAX data</button>
 <a onclick="loadDoc()">Click to AJAX data</a>
 
-<div data-controller="js"></div>
+<%= javascript_include_tag 'js_controller.js' %>
+<%# <%= javascript_import_module_tag 'js_controller.js', 'data-turbo-track': 'reload' %>
