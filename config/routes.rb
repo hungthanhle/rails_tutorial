@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   get '/contact', to: 'static_pages#contact'
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
+
+  get '/auth/google_oauth2/callback', to: 'sessions#google'
 end

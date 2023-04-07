@@ -15,5 +15,10 @@
       <%= f.submit "Log in", class: "btn btn-primary" %>
     <% end %>
     <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    <div class="divider"></div>
+    <h2>Sign in with</h2>
+    <%= link_to "Google", '/auth/google_oauth2' %>
+    <%# <%= button_to "Sign Up With Google", '/auth/google_oauth2', data: { turbo: false } %>
+    
   </div>
 </div>
