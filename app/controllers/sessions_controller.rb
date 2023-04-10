@@ -48,7 +48,8 @@ class SessionsController < ApplicationController
       forwarding_url = session[:forwarding_url]
       reset_session
       log_in user
-      forget(user)
+      cookies[:remember_me]  == '1' ? remember(user) : forget(user)
+      cookies.delete :remember_me
       redirect_to forwarding_url || user
     else
       flash[:danger] = 'Invalid email/password combination'
