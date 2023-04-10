@@ -15,5 +15,13 @@
       <%= f.submit "Log in", class: "btn btn-primary" %>
     <% end %>
     <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    <div class="divider"></div>
+    <h2>Sign in with</h2>
+    <a href="/auth/google_oauth2" id="google_oauth2">Google</a>
+    <div class="checkbox inline">
+      <input type="checkbox" id="checked_google_oauth2">
+      <span for="google_oauth2"> Remember me on this computer</span>
+    </div>
+    <%= javascript_include_tag 'cookie.js' %>
   </div>
 </div>

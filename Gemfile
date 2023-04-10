@@ -67,6 +67,12 @@ gem 'image_processing', '1.9.3'
 
 gem 'mini_magick', '4.9.5'
 
+gem 'omniauth-google-oauth2'
+gem 'omniauth'
+gem "omniauth-rails_csrf_protection"
+
+gem 'figaro'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 

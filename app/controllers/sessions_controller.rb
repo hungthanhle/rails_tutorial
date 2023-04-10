@@ -31,4 +31,29 @@ class SessionsController < ApplicationController
     log_out if logged_in?
     redirect_to root_path
   end
+
+  def google
+    # render html: 'hello'
+    # render json: request.env['omniauth.auth']
+    auth_hash = request.env['omniauth.auth']
+    email = auth_hash.info.email
+    google_id = auth_hash.uid
+    name = auth_hash.info.name
+    user = User.find_or_create_by(email:, google_id:)
+    if user
+      if !user.activated?
+        user.update_attribute(:name, name)
+        user.update_attribute(:activated, true)
+      end
+      forwarding_url = session[:forwarding_url]
+      reset_session
+      log_in user
+      cookies[:remember_me]  == '1' ? remember(user) : forget(user)
+      cookies.delete :remember_me
+      redirect_to forwarding_url || user
+    else
+      flash[:danger] = 'Invalid email/password combination'
+      render 'new'
+    end
+  end
 end
