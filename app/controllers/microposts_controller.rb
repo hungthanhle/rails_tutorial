@@ -24,6 +24,14 @@ class MicropostsController < ApplicationController
     end
   end
 
+  def show
+    @micropost = Micropost.find_by id: params[:id], micropost_id: nil
+    @user = User.find(@micropost.user_id)
+    @comments = Micropost.where("micropost_id = ?", params[:id]).page(params[:page]).per_page(2)
+    @react = React.find_by micropost_id: params[:id], user_id: current_user.id
+    @comment = Micropost.new
+  end
+
   private
     def micropost_params
       params.require(:micropost).permit(:content, :image)

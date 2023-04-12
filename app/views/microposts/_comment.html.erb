@@ -1,0 +1,17 @@
+<li id="comment-<%= comment.id %>">
+  <%= link_to gravatar_for(comment.user, size: 50), comment.user %>
+  <span class="user"><%= link_to comment.user.name, comment.user %></span>
+  <span class="content">
+    <%= comment.content %>
+    <%= image_tag comment.image if comment.image.attached? %>
+  </span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(comment.created_at) %> ago.<br>
+    React (<%= comment.reacts.count %>)
+    <% if current_user?(comment.user) %>
+      <%= button_to "delete", comment, method: :delete, data: { confirm: "You sure?" } %>
+    <% end %>
+    <% reacted = comment.reacts.find_by user_id: current_user.id %>
+    <%= render :partial => 'reacts/form', :locals => {:react => reacted, :post => comment} if logged_in? %>
+  </span>
+</li>

@@ -1,0 +1,14 @@
+<% if react.nil? %>
+  <% react = React.new %>
+  <%= form_with(model: react, local: true) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= f.select :emotion, options_for_select(["like", "love", "haha", "wow", "sad", "angry"]), :class => 'field' %>
+    <%= f.hidden_field :micropost_id, value: post.id %>
+    <%= f.submit "React", class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <%= form_with(model: react, local: true) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= f.submit "Remove-#{react.emotion}", class: "btn btn-primary", method: :delete %>
+  <% end %>
+<% end %>
