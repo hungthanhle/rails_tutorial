@@ -6,7 +6,12 @@ class MicropostsController < ApplicationController
     @micropost.image.attach(params[:micropost][:image])
     if @micropost.save
       flash[:success] = "Micropost created!"
-      redirect_to root_url
+      # redirect to be determined
+      if request.referrer.nil? || request.referrer == microposts_url
+        redirect_to root_url
+      else
+        redirect_to request.referrer
+      end
     else
       @feed_items = current_user.feed.where(micropost_id: nil).paginate(page: params[:page])
       render 'static_pages/home'
@@ -19,7 +24,7 @@ class MicropostsController < ApplicationController
     # redirect to be determined
     if request.referrer.nil? || request.referrer == microposts_url
       redirect_to root_url
-      else
+    else
       redirect_to request.referrer
     end
   end
@@ -34,7 +39,7 @@ class MicropostsController < ApplicationController
 
   private
     def micropost_params
-      params.require(:micropost).permit(:content, :image)
+      params.require(:micropost).permit(:content, :image, :micropost_id)
     end
 
     def correct_user
