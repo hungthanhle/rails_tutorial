@@ -7,8 +7,7 @@
     <%= f.submit "React", class: "btn btn-primary" %>
   <% end %>
 <% else %>
-  <%= form_with(model: react, local: true) do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
-    <%= f.submit "Remove-#{react.emotion}", class: "btn btn-primary", method: :delete %>
+  <% if current_user?(react.user) %>
+    <%= button_to "Remove-#{react.emotion}", react, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %>
   <% end %>
 <% end %>
