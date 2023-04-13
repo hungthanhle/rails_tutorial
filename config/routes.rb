@@ -22,5 +22,5 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
 
   get '/auth/google_oauth2/callback', to: 'sessions#google'
-  resources :reacts
+  resources :reacts, only: [:create, :destroy]
 end

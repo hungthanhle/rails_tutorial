@@ -21,8 +21,8 @@ class MicropostsController < ApplicationController
   def destroy
     @micropost.destroy
     flash[:success] = "Micropost deleted"
-    # redirect to be determined
-    if request.referrer.nil? || request.referrer == microposts_url
+    # binding.b
+    if request.referrer.nil? || request.referrer == microposts_url || request.referer == request.original_url
       redirect_to root_url
     else
       redirect_to request.referrer
@@ -31,7 +31,7 @@ class MicropostsController < ApplicationController
 
   def show
     @micropost = Micropost.find_by id: params[:id], micropost_id: nil
-    @user = User.find(@micropost.user_id)
+    @user = User.find(@micropost.user_id) #
     @comments = Micropost.where("micropost_id = ?", params[:id]).page(params[:page]).per_page(2)
     @react = React.find_by micropost_id: params[:id], user_id: current_user.id
     @comment = Micropost.new

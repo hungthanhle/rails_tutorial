@@ -4,13 +4,21 @@
     <section class="user_info">
       <h1>
         <%= gravatar_for @user %>
-        <%= @user.name %>
+        <span class="user"><%= link_to @user.name, @user %></span>
       </h1>
     </section>
     <section class="user_info">
       <h1>
         <%= @micropost.content %>
       </h1>
+    </section>
+    <section class="user_info">
+      <span class="timestamp">
+        Posted at <%= @micropost.created_at %>.
+        <% if current_user?(@micropost.user) %>
+          <%= button_to "delete", @micropost, method: :delete, data: { confirm: "You sure?" } %>
+        <% end %>
+      </span>
     </section>
     <h3>React (<%= @micropost.reacts.count %>)</h3>
     <%= render :partial => 'reacts/form', :locals => {:react => @react, :post => @micropost} if logged_in? %>
