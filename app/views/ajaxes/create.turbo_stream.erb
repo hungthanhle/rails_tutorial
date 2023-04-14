@@ -1,0 +1,6 @@
+<%= turbo_stream.prepend "ajaxes" do %>
+  <%= render "ajax", ajax: @ajax %>
+<% end %>
+<%= turbo_stream.replace "#{dom_id(Ajax.new)}_form" do %>
+  <%= render "form", ajax: Ajax.new %>
+<% end %>

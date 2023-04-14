@@ -1,0 +1,17 @@
+<%= form_with(model: ajax, id: "#{dom_id(ajax)}_form") do |form| %>
+  <% if ajax.errors.any? %>
+    <div>
+      <h2><%= pluralize(ajax.errors.count, "error") %> prohibited this ajax from being saved:</h2>
+      <ul>
+        <% ajax.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :content %>
+    <%= form.text_field :content, placeholder: "Add a new ajax..." %>
+    <%= form.submit %>
+  </div>
+<% end %>

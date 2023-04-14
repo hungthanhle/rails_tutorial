@@ -1,7 +1,14 @@
-<!-- tạo form để tạo ajax mới -->
-<%= form_for @ajax, remote: true do |f| %>
-	<%= f.text_field :content, class: "input-box" %>
-	<%= f.submit %>
-<% end %>
-<hr>
-
+<%# https://www.colby.so/posts/turbo-rails-101-todo-list %>
+<div>
+  <h2>
+    Your ajaxes
+  </h2>
+  <div>
+    <div>
+      <%= render "form", ajax: Ajax.new %>
+    </div>
+    <ul id="ajaxes">
+      <%= render @ajaxes %>
+    </ul>
+  </div>
+</div>

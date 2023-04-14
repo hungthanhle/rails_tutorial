@@ -3,11 +3,11 @@ class AjaxesController < ApplicationController
     @ajax = Ajax.new(ajax_params)
     respond_to do |format|
       if @ajax.save
-        format.js
+        format.turbo_stream
       end
     end
   end
-
+  
   def index
     @ajaxes = Ajax.all
     @ajax = Ajax.new
