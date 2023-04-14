@@ -100,6 +100,14 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def feed_post
+    feed.where(micropost_id: nil)
+  end
+
+  def my_post
+    microposts.where(micropost_id: nil)
+  end
+  
   private
     # Converts email to all lower-case.
     def downcase_email
