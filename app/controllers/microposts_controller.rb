@@ -13,7 +13,7 @@ class MicropostsController < ApplicationController
         redirect_to request.referrer
       end
     else
-      @feed_items = current_user.feed.where(micropost_id: nil).paginate(page: params[:page])
+      @feed_items = current_user.feed_post.paginate(page: params[:page])
       render 'static_pages/home'
     end
   end

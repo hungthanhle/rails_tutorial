@@ -1,0 +1,6 @@
+<%# <%= turbo_stream.prepend "ajaxes" do %>
+  <%# <%= render "ajax", ajax: @ajax %>
+<%# <% end %>
+<%= turbo_stream.replace "react_#{dom_id(React.new)}_#{dom_id(@react.micropost)}_create_form" do %>
+  <%= render "form", react: @react, post: @react.micropost %>
+<% end %>

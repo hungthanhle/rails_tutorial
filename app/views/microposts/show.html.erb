@@ -20,7 +20,6 @@
         <% end %>
       </span>
     </section>
-    <h3>React (<%= @micropost.reacts.count %>)</h3>
     <%= render :partial => 'reacts/form', :locals => {:react => @react, :post => @micropost} if logged_in? %>
   </aside>
   <div class="col-md-8">

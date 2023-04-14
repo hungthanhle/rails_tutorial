@@ -4,25 +4,36 @@ class ReactsController < ApplicationController
 
   def create
     @react = current_user.reacts.build(react_params)
-    if @react.save
-      flash[:success] = "React created!"
-      if request.referrer.nil? || request.referrer == microposts_url
-        redirect_to root_url
+    respond_to do |format|
+      if @react.save
+        format.turbo_stream
+        format.html{
+          flash[:success] = "React created!"
+          if request.referrer.nil? || request.referrer == microposts_url
+            redirect_to root_url
+          else
+            redirect_to request.referrer
+          end     
+        }
       else
-        redirect_to request.referrer
+        redirect_to request.referrer, status: :unprocessable_entity
       end
-    else
-      redirect_to request.referrer, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @react.destroy
-    flash[:success] = "React deleted"
-    if request.referrer.nil? || request.referrer == microposts_url
-      redirect_to root_url
-    else
-      redirect_to request.referrer
+    respond_to do |format|
+      if @react.destroy
+        format.turbo_stream
+        format.html{
+          flash[:success] = "React deleted"
+          if request.referrer.nil? || request.referrer == microposts_url
+            redirect_to root_url
+          else
+            redirect_to request.referrer
+          end      
+        }
+      end
     end
   end
 
@@ -33,6 +44,7 @@ class ReactsController < ApplicationController
 
     def correct_user
       @react = current_user.reacts.find_by(id: params[:id])
+      @micropost = @react.micropost
       redirect_to root_url if @react.nil?
     end
 end
