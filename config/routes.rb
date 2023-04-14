@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # resources :ajax
+  resources :ajaxes
   # get 'password_resets/new'
   # get 'password_resets/edit'
   get 'js', to: 'js#index'

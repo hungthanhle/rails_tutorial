@@ -1,0 +1,2 @@
+class Ajax < ApplicationRecord
+end
