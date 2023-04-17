@@ -281,3 +281,26 @@ margin-top: 10px;
   width: auto;
   margin-left: 0;
 }
+
+figure {
+	border-radius: 90px;
+	background: white;
+}
+.emoji {
+	width: 50px;
+	transition: .2s ease;
+	&:hover {
+		transform: scale(1.5);
+		cursor: pointer;
+	}
+}
+.button_to {
+  display: inline;
+}
+.btn-emoji{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor: pointer;
+  outline:none;
+}

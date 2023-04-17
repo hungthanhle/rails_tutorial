@@ -1,4 +1,0 @@
-<h3>React (<%= post.reacts.count %>)</h3>
-<% if current_user?(react.user) %>
-  <%= button_to "Remove-#{react.emotion}", react, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %>
-<% end %>

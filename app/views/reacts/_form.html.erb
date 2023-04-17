@@ -1,17 +1,30 @@
+<% arr = ["like", "love", "haha", "wow", "sad", "angry"]%>
 <% if react.nil? %>
   <% react = React.new %>
-  <%= form_with(model: react, id: "react_#{dom_id(react)}_#{dom_id(post)}_create_form") do |f| %>
+  <figure id=<%="#{dom_id(post)}_form"%>>
     <h3>React (<%= post.reacts.count %>)</h3>
-    <%= render 'shared/error_messages', object: f.object %>
-    <%= f.select :emotion, options_for_select(["like", "love", "haha", "wow", "sad", "angry"]), :class => 'field' %>
-    <%= f.hidden_field :micropost_id, value: post.id %>
-    <%= f.submit "React", class: "btn btn-primary" %>
-  <% end %>
+    <% arr.each do |e| %>
+      <%= button_to image_submit_tag("create_#{e}.png", :class => "#{e} emoji"), 
+        react, params: {react:{emotion: e, micropost_id: post.id}}, 
+        class: "btn-emoji", id: "#{e}_#{dom_id(react)}_#{dom_id(post)}_create_form" 
+      %>
+    <%end %>
+  </figure>
 <% else %>
-  <div id=<%="react_#{dom_id(react)}_#{dom_id(post)}_delete_form"%>>
+  <figure id=<%="#{dom_id(post)}_form"%>>
     <h3>React (<%= post.reacts.count %>)</h3>
-    <% if current_user?(react.user) %>
-      <%= button_to "Remove-#{react.emotion}", react, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %>
-    <% end %>
-  </div>
+    <% arr.each do |e| %>
+      <% if e == react.emotion %>
+        <%= button_to image_submit_tag("destroy_#{e}.png", :class => "#{e} emoji"), 
+          react, method: :delete, params: {react:{emotion: e, micropost_id: post.id}}, 
+          class: "btn-emoji", id: "#{e}_#{dom_id(react)}_#{dom_id(post)}_create_form" 
+        %>
+      <% else %>
+        <%= button_to image_submit_tag("create_#{e}.png", :class => "#{e} emoji"), 
+          react, params: {react:{emotion: e, micropost_id: post.id}}, 
+          class: "btn-emoji", id: "#{e}_#{dom_id(react)}_#{dom_id(post)}_create_form" 
+        %>
+      <% end %>
+    <%end %>
+  </figure>
 <% end %>
