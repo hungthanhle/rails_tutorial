@@ -6,7 +6,6 @@ class MicropostsController < ApplicationController
     @micropost.image.attach(params[:micropost][:image])
     if @micropost.save
       flash[:success] = "Micropost created!"
-      # redirect to be determined
       if request.referrer.nil? || request.referrer == microposts_url
         redirect_to root_url
       else
@@ -21,7 +20,6 @@ class MicropostsController < ApplicationController
   def destroy
     @micropost.destroy
     flash[:success] = "Micropost deleted"
-    # binding.b
     if request.referrer.nil? || request.referrer == microposts_url || request.referer == request.original_url
       redirect_to root_url
     else
@@ -32,7 +30,7 @@ class MicropostsController < ApplicationController
   def show
     @micropost = Micropost.find_by id: params[:id], micropost_id: nil
     @user = User.find(@micropost.user_id) #
-    @comments = Micropost.where("micropost_id = ?", params[:id]).page(params[:page]).per_page(params[:per_page] || 4)
+    @comments = Micropost.where(micropost_id: params[:id]).page(params[:page]).per_page(params[:per_page] || 4)
     @react = React.find_by micropost_id: params[:id], user_id: current_user.id
     @comment = Micropost.new
   end
