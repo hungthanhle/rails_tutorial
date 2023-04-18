@@ -9,7 +9,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    # debugger
     @microposts = @user.my_post.paginate(page: params[:page], per_page: params[:per_page] || 4)
     @comment = Micropost.new
   end
