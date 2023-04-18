@@ -33,6 +33,6 @@
       <% end %>
     </ol>
     <%= will_paginate @comments %>
-    <%= render 'comment_form' if logged_in? %>
+    <%= render 'comment_form', post: @micropost if logged_in? %>
   </div>
 </div>

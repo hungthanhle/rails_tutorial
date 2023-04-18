@@ -1,5 +1,5 @@
 class MicropostsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :logged_in_user, only: [:create, :destroy, :show]
   before_action :correct_user, only: :destroy
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -13,7 +13,7 @@ class MicropostsController < ApplicationController
         redirect_to request.referrer
       end
     else
-      @feed_items = current_user.feed_post.paginate(page: params[:page])
+      @feed_items = current_user.feed_post.paginate(page: params[:page], per_page: params[:per_page] || 4)
       render 'static_pages/home'
     end
   end
@@ -32,7 +32,7 @@ class MicropostsController < ApplicationController
   def show
     @micropost = Micropost.find_by id: params[:id], micropost_id: nil
     @user = User.find(@micropost.user_id) #
-    @comments = Micropost.where("micropost_id = ?", params[:id]).page(params[:page]).per_page(2)
+    @comments = Micropost.where("micropost_id = ?", params[:id]).page(params[:page]).per_page(params[:per_page] || 4)
     @react = React.find_by micropost_id: params[:id], user_id: current_user.id
     @comment = Micropost.new
   end

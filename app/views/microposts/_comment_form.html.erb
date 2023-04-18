@@ -1,7 +1,7 @@
 <%= form_with(model: @comment, local: true) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.hidden_field :micropost_id, value: @micropost.id %>
+    <%= f.hidden_field :micropost_id, value: post.id %>
     <%= f.text_area :content, placeholder: "Compose new comment..." %>
   </div>
   <%= f.submit "Comment", class: "btn btn-primary" %>
