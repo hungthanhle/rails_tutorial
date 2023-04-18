@@ -8,6 +8,8 @@ class User < ApplicationRecord
   before_save :downcase_email
   before_create :create_activation_digest #called a method reference
 
+  has_many :reacts, dependent: :destroy
+
   validates(:name, presence: true, length: { maximum: 50 })
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates(:email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: true)
@@ -98,6 +100,14 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def feed_post
+    feed.where(micropost_id: nil)
+  end
+
+  def my_post
+    microposts.where(micropost_id: nil)
+  end
+  
   private
     # Converts email to all lower-case.
     def downcase_email

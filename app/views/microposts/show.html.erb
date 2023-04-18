@@ -1,0 +1,38 @@
+<% provide(:title, "Post #{@micropost.id}") %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <span class="user"><%= link_to @user.name, @user %></span>
+      </h1>
+    </section>
+    <section class="user_info">
+      <h1>
+        <%= @micropost.content %>
+      </h1>
+    </section>
+    <section class="user_info">
+      <span class="timestamp">
+        Posted at <%= @micropost.created_at %>.
+        <% if current_user?(@micropost.user) %>
+          <%= button_to "delete", @micropost, method: :delete, data: { confirm: "You sure?" } %>
+        <% end %>
+      </span>
+    </section>
+    <%= render :partial => 'reacts/form', :locals => {:react => @react, :post => @micropost} if logged_in? %>
+  </aside>
+  <div class="col-md-8">
+    <h3>Comment (<%= @comments.count %>)</h3>
+    <%# <ol class="microposts"> %>
+      <%# <%= render @comments %>
+    <%# </ol> %>
+    <ol class="microposts">
+      <% @comments.each do |comment| %>
+        <%= render partial: "microposts/comment",  locals: {comment: comment} %>
+      <% end %>
+    </ol>
+    <%= will_paginate @comments %>
+    <%= render 'comment_form', post: @micropost if logged_in? %>
+  </div>
+</div>

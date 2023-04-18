@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "#{dom_id(@micropost)}_form" do %>
+  <%= render "form", react: nil, post: @micropost %>
+<% end %>

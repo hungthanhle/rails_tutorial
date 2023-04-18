@@ -12,4 +12,18 @@
       <%= button_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
     <% end %>
   </span>
+  <% react = micropost.reacts.find_by user_id: current_user.id %>
+  <%= render :partial => 'reacts/form', :locals => {:react => react, :post => micropost} if logged_in? %>
+  <span class="content">
+    <ol class="microposts">
+      <% comments = Micropost.where(micropost_id: micropost.id).first(2) %>
+      <% comments.each do |comment| %>
+        <%= render partial: "microposts/comment",  locals: {comment: comment} %>
+      <% end %>
+    </ol>
+    <%= render 'microposts/comment_form', post: micropost if logged_in? %>
+  </span>
+  <div class="more">
+    <%= link_to "Read more ...", micropost %>
+  </div>
 </li>

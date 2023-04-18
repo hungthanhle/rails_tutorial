@@ -1,0 +1,30 @@
+<% arr = ["like", "love", "haha", "wow", "sad", "angry"]%>
+<% if react.nil? %>
+  <% react = React.new %>
+  <figure id=<%="#{dom_id(post)}_form"%>>
+    <h3>React (<%= post.reacts.count %>)</h3>
+    <% arr.each do |e| %>
+      <%= button_to image_submit_tag("create_#{e}.png", :class => "#{e} emoji"), 
+        react, params: {react:{emotion: e, micropost_id: post.id}}, 
+        class: "btn-emoji", id: "#{e}_#{dom_id(react)}_#{dom_id(post)}_create_form" 
+      %>
+    <%end %>
+  </figure>
+<% else %>
+  <figure id=<%="#{dom_id(post)}_form"%>>
+    <h3>React (<%= post.reacts.count %>)</h3>
+    <% arr.each do |e| %>
+      <% if e == react.emotion %>
+        <%= button_to image_submit_tag("destroy_#{e}.png", :class => "#{e} emoji"), 
+          react, method: :delete, params: {react:{emotion: e, micropost_id: post.id}}, 
+          class: "btn-emoji", id: "#{e}_#{dom_id(react)}_#{dom_id(post)}_create_form" 
+        %>
+      <% else %>
+        <%= button_to image_submit_tag("create_#{e}.png", :class => "#{e} emoji"), 
+          react, params: {react:{emotion: e, micropost_id: post.id}}, 
+          class: "btn-emoji", id: "#{e}_#{dom_id(react)}_#{dom_id(post)}_create_form" 
+        %>
+      <% end %>
+    <%end %>
+  </figure>
+<% end %>
