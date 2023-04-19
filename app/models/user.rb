@@ -108,6 +108,8 @@ class User < ApplicationRecord
     microposts.where(micropost_id: nil)
   end
   
+  CSV_ATTRIBUTES = %w(name email).freeze
+
   private
     # Converts email to all lower-case.
     def downcase_email

@@ -1,4 +1,12 @@
 <% provide(:title, "Edit user") %>
+<% if current_user?(@user) %>
+  <h1>Download your info</h1>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= link_to "link_export", users_download_path(format: :csv) %>
+    </div>
+  </div>
+<% end %>
 <h1>Update your profile</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">

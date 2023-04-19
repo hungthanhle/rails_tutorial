@@ -76,6 +76,14 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def download
+    csv = ExportCsvService.new User.all, User::CSV_ATTRIBUTES
+    respond_to do |format|
+      format.csv { send_data csv.perform,
+        filename: "users.csv" }
+    end
+  end
+
   private
     def user_params
       params.require(:user).permit(:name, :email, :password,:password_confirmation)

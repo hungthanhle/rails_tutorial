@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/download'
   # get 'password_resets/new'
   # get 'password_resets/edit'
   get 'js', to: 'js#index'

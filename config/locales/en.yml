@@ -31,3 +31,7 @@
 
 en:
   hello: "Hello world"
+
+  header_csv:
+    name: Full Name
+    email: Email Address
