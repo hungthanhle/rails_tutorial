@@ -332,6 +332,7 @@ DEPENDENCIES
   rails (~> 7.0.4, >= 7.0.4.3)
   rails-controller-testing
   rspec-rails (>= 3.9.0)
+  rubyzip
   sassc-rails
   selenium-webdriver
   sprockets-rails

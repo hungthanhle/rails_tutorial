@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/bulk_download'
   get 'users/download'
   # get 'password_resets/new'
   # get 'password_resets/edit'

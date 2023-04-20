@@ -3,7 +3,10 @@
   <h1>Download your info</h1>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <%= link_to "link_export", users_download_path(format: :csv) %>
+      <%= link_to "link_export_csv", users_download_path(format: :csv) %>
+    </div>
+    <div class="col-md-6 col-md-offset-3">
+      <%= link_to "link_export_zip", users_bulk_download_path(format: :zip) %>
     </div>
   </div>
 <% end %>

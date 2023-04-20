@@ -1,3 +1,5 @@
+require 'zip'
+
 class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy] #view middleware
@@ -82,6 +84,23 @@ class UsersController < ApplicationController
       format.csv { send_data csv.perform,
         filename: "users.csv" }
     end
+  end
+
+  def bulk_download
+    users = User.all
+    respond_to do |format|
+      format.zip {
+        compressed_filestream = Zip::OutputStream.write_buffer do |zos|
+          users.each do |user|
+            zos.put_next_entry "#{user.name}-#{user.id}.json"
+            zos.print user.to_json(only: [:name, :email])
+          end
+        end
+        compressed_filestream.rewind
+        send_data compressed_filestream.read, filename: "users.zip"
+      }
+    end
+    
   end
 
   private
