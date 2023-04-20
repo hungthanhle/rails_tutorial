@@ -78,29 +78,27 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
-  def download
-    csv = ExportCsvService.new User.all, User::CSV_ATTRIBUTES
-    respond_to do |format|
-      format.csv { send_data csv.perform,
-        filename: "users.csv" }
-    end
-  end
-
   def bulk_download
-    users = User.all
+    my_month_post = current_user.my_post.where(:created_at => 1.month.ago..Time.now)
+    my_month_following = current_user.my_following_and_time(:created_at => 1.month.ago..Time.now)
+    my_month_followers = current_user.my_followers_and_time(:created_at => 1.month.ago..Time.now)
     respond_to do |format|
       format.zip {
         compressed_filestream = Zip::OutputStream.write_buffer do |zos|
-          number = 0
-          3.times do |user|
-            csv = ExportCsvService.new User.all, User::CSV_ATTRIBUTES
-            zos.put_next_entry "#{number}.csv"
-            zos.print csv.perform
-            number = number + 1
-          end
+          csv = ExportCsvService.new my_month_post, %w(content created_at).freeze
+          zos.put_next_entry "#{current_user.name}_month_post.csv"
+          zos.print csv.perform_object
+
+          csv = ExportCsvService.new my_month_following, %w(name created_at).freeze
+          zos.put_next_entry "#{current_user.name}_month_following.csv"
+          zos.print csv.perform_array
+
+          csv = ExportCsvService.new my_month_followers, %w(name created_at).freeze
+          zos.put_next_entry "#{current_user.name}_month_followers.csv"
+          zos.print csv.perform_array
         end
         compressed_filestream.rewind
-        send_data compressed_filestream.read, filename: "users.zip"
+        send_data compressed_filestream.read, filename: "#{current_user.name}.zip"
       }
     end
     

@@ -107,8 +107,14 @@ class User < ApplicationRecord
   def my_post
     microposts.where(micropost_id: nil)
   end
-  
-  CSV_ATTRIBUTES = %w(name email).freeze
+
+  def my_following_and_time(time)
+    active_relationships.joins(:followed).where(time).pluck("users.name AS name","relationships.created_at AS created_at")
+  end
+
+  def my_followers_and_time(time)
+    passive_relationships.joins(:follower).where(time).pluck("users.name AS name","relationships.created_at AS created_at")
+  end
 
   private
     # Converts email to all lower-case.
