@@ -91,9 +91,12 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.zip {
         compressed_filestream = Zip::OutputStream.write_buffer do |zos|
-          users.each do |user|
-            zos.put_next_entry "#{user.name}-#{user.id}.json"
-            zos.print user.to_json(only: [:name, :email])
+          number = 0
+          3.times do |user|
+            csv = ExportCsvService.new User.all, User::CSV_ATTRIBUTES
+            zos.put_next_entry "#{number}.csv"
+            zos.print csv
+            number = number + 1
           end
         end
         compressed_filestream.rewind
