@@ -95,7 +95,7 @@ class UsersController < ApplicationController
           3.times do |user|
             csv = ExportCsvService.new User.all, User::CSV_ATTRIBUTES
             zos.put_next_entry "#{number}.csv"
-            zos.print csv
+            zos.print csv.perform
             number = number + 1
           end
         end
