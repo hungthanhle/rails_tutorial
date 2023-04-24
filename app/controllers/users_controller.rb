@@ -79,9 +79,9 @@ class UsersController < ApplicationController
   end
 
   def bulk_download
-    my_month_post = current_user.my_post.where(:created_at => 1.month.ago..Time.now)
-    my_month_following = current_user.my_following_and_time(:created_at => 1.month.ago..Time.now)
-    my_month_followers = current_user.my_followers_and_time(:created_at => 1.month.ago..Time.now)
+    my_month_post = current_user.my_post.where(:created_at => 1.month.ago.beginning_of_day..Date.today)
+    my_month_following = current_user.my_following_and_time(:created_at => 1.month.ago.beginning_of_day..Date.today)
+    my_month_followers = current_user.my_followers_and_time(:created_at => 1.month.ago.beginning_of_day..Date.today)
     respond_to do |format|
       format.zip {
         compressed_filestream = Zip::OutputStream.write_buffer do |zos|
