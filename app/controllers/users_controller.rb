@@ -89,11 +89,11 @@ class UsersController < ApplicationController
           zos.put_next_entry "#{current_user.name}_month_post.csv"
           zos.print csv.perform_object
 
-          csv = ExportCsvService.new my_month_following, %w(name created_at).freeze
+          csv = ExportCsvService.new my_month_following, %w(name created_at_vn).freeze
           zos.put_next_entry "#{current_user.name}_month_following.csv"
           zos.print csv.perform_array
 
-          csv = ExportCsvService.new my_month_followers, %w(name created_at).freeze
+          csv = ExportCsvService.new my_month_followers, %w(name created_at_vn).freeze
           zos.put_next_entry "#{current_user.name}_month_followers.csv"
           zos.print csv.perform_array
         end
