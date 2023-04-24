@@ -16,14 +16,14 @@ class SessionsController < ApplicationController
         message = "Account not activated. "
         message += "Check your email for the activation link."
         flash[:warning] = message
-        redirect_to root_url
+        redirect_to root_url, status: :unprocessable_entity
       end
     else
       # Create an error message.
       # chưa hiểu - phải reload mới flash, chưa hiểu assert template
       flash[:danger] = 'Invalid email/password combination' # Not quite right!
       # flash.now[:danger] = 'Invalid email/password combination'
-      render 'new'
+      render 'new', status: :unprocessable_entity
     end
   end
 
@@ -50,10 +50,10 @@ class SessionsController < ApplicationController
       log_in user
       cookies[:remember_me]  == '1' ? remember(user) : forget(user)
       cookies.delete :remember_me
-      redirect_to forwarding_url || user
+      redirect_to forwarding_url || user, status: :unprocessable_entity
     else
       flash[:danger] = 'Invalid email/password combination'
-      render 'new'
+      render 'new', status: :unprocessable_entity
     end
   end
 end
