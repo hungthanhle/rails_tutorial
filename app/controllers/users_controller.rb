@@ -1,3 +1,5 @@
+require 'zip'
+
 class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy] #view middleware
@@ -74,6 +76,32 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
+  end
+
+  def bulk_download
+    my_month_post = current_user.my_post.where(:created_at => 1.month.ago.beginning_of_day..Date.today)
+    my_month_following = current_user.my_following_and_time(:created_at => 1.month.ago.beginning_of_day..Date.today)
+    my_month_followers = current_user.my_followers_and_time(:created_at => 1.month.ago.beginning_of_day..Date.today)
+    respond_to do |format|
+      format.zip {
+        compressed_filestream = Zip::OutputStream.write_buffer do |zos|
+          csv = ExportCsvService.new my_month_post, %w(content created_at).freeze
+          zos.put_next_entry "#{current_user.name}_month_post.csv"
+          zos.print csv.perform_object
+
+          csv = ExportCsvService.new my_month_following, %w(name created_at_vn).freeze
+          zos.put_next_entry "#{current_user.name}_month_following.csv"
+          zos.print csv.perform_array
+
+          csv = ExportCsvService.new my_month_followers, %w(name created_at_vn).freeze
+          zos.put_next_entry "#{current_user.name}_month_followers.csv"
+          zos.print csv.perform_array
+        end
+        compressed_filestream.rewind
+        send_data compressed_filestream.read, filename: "#{current_user.name}.zip"
+      }
+    end
+    
   end
 
   private

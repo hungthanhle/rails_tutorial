@@ -31,3 +31,10 @@
 
 en:
   hello: "Hello world"
+
+  header_csv:
+    name: Name
+    email: Email Address
+    content: Post
+    created_at: Date
+    created_at_vn: Ngày
