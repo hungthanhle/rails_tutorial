@@ -1,6 +1,9 @@
 import consumer from "channels/consumer"
 
-consumer.subscriptions.create("NotificationChannel", {
+consumer.subscriptions.create({
+    channel: "NotificationChannel",
+    room: 2
+  }, {
   connected() {
     // Called when the subscription is ready for use on the server
     console.log('connected!')
@@ -13,5 +16,12 @@ consumer.subscriptions.create("NotificationChannel", {
   received(data) {
     // Called when there's incoming data on the websocket for this channel
     console.log(data)
+    
+    // Push notification
+    if(Notification.permission == 'granted'){
+      let title = "Push Notification"
+      let options = {body: data}
+      new Notification(title, options)
+    }
   }
 });
