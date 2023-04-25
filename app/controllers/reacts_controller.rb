@@ -6,6 +6,7 @@ class ReactsController < ApplicationController
     @react = current_user.reacts.build(react_params)
     respond_to do |format|
       if @react.save
+        notification = Notification.create(user_id: @react.micropost.user_id, notice_type: "react", notification_with_id: @react.id)
         format.turbo_stream
         format.html{
           flash[:success] = "React created!"
@@ -24,6 +25,8 @@ class ReactsController < ApplicationController
   def destroy
     respond_to do |format|
       if @react.destroy
+        notification = Notification.find_by notification_with_id: @react.id, notice_type: "react"
+        notification.destroy
         format.turbo_stream
         format.html{
           flash[:success] = "React deleted"

@@ -5,6 +5,10 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     @micropost.image.attach(params[:micropost][:image])
     if @micropost.save
+      if !@micropost.micropost_id.nil?
+        post = Micropost.find_by id: @micropost.micropost_id, micropost_id: nil
+        notification = Notification.create(user_id: post.user_id, notice_type: "comment", notification_with_id: @micropost.id)
+      end
       flash[:success] = "Micropost created!"
       if request.referrer.nil? || request.referrer == microposts_url
         redirect_to root_url
@@ -19,6 +23,10 @@ class MicropostsController < ApplicationController
   
   def destroy
     @micropost.destroy
+    if !@micropost.micropost_id.nil?
+      notification = Notification.find_by notification_with_id: @micropost.id, notice_type: "comment"
+      notification.destroy
+    end
     flash[:success] = "Micropost deleted"
     if request.referrer.nil? || request.referrer == microposts_url || request.referer == request.original_url
       redirect_to root_url
