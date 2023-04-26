@@ -7,7 +7,7 @@ class ReactsController < ApplicationController
     respond_to do |format|
       if @react.save
         notification = Notification.create(user_id: @react.micropost.user_id, notice_type: "react", notification_with_id: @react.id)
-        ActionCable.server.broadcast("notification_channel_2", "Yesssssss")
+        ActionCable.server.broadcast("notification_channel_#{notification.user_id}", "#{current_user.name} đã react tại #{@react.micropost.content}")
         format.turbo_stream
         format.html{
           flash[:success] = "React created!"

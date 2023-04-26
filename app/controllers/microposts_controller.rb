@@ -8,6 +8,7 @@ class MicropostsController < ApplicationController
       if !@micropost.micropost_id.nil?
         post = Micropost.find_by id: @micropost.micropost_id, micropost_id: nil
         notification = Notification.create(user_id: post.user_id, notice_type: "comment", notification_with_id: @micropost.id)
+        ActionCable.server.broadcast("notification_channel_#{notification.user_id}", "#{current_user.name} đã comment tại post #{post.content}")
       end
       flash[:success] = "Micropost created!"
       if request.referrer.nil? || request.referrer == microposts_url
