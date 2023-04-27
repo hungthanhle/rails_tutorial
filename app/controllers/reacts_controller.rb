@@ -6,8 +6,7 @@ class ReactsController < ApplicationController
     @react = current_user.reacts.build(react_params)
     respond_to do |format|
       if @react.save
-        notification = Notification.create(user_id: @react.micropost.user_id, notice_type: "react", notification_with_id: @react.id)
-        ActionCable.server.broadcast("notification_channel_#{notification.user_id}", "#{current_user.name} đã react tại #{@react.micropost.content}")
+        notification_react
         format.turbo_stream
         format.html{
           flash[:success] = "React created!"
@@ -69,5 +68,18 @@ class ReactsController < ApplicationController
       @react = current_user.reacts.find_by(id: params[:id])
       @micropost = @react.micropost
       redirect_to root_url if @react.nil?
+    end
+
+    def notification_react
+      post = @react.micropost
+      content = "#{current_user.name} đã react tại #{post.content}"
+      notification = Notification.create(user_id: post.user_id, notice_type: "react", notification_with_id: @react.id, content: content)
+      react_num = post.reacts.count
+      ActionCable.server.broadcast("notification_channel_#{notification.user_id}", {
+        created_at: notification.created_at,
+        content: notification.content,
+        reactNum: react_num,
+        reactPostID: post.id
+      })
     end
 end
