@@ -56,6 +56,8 @@ class MicropostsController < ApplicationController
         content = "#{current_user.name} đã comment tại post #{post.content}"
         notification = Notification.create(user_id: post.user_id, notice_type: "comment", notification_with_id: @micropost.id, content: content)
         ActionCable.server.broadcast("notification_channel_#{notification.user_id}", notification)
+
+        current_user.send_notification(notification)
       end
     end
 end

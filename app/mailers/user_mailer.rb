@@ -19,4 +19,10 @@ class UserMailer < ApplicationMailer
     @user = user
     mail to: user.email, subject: "Password reset"
   end
+
+  def notification(notification)
+    @notification = notification
+    @user = User.find(notification.user_id)
+    mail to: @user.email, subject: "Notification from Rails Tutorial"
+  end
 end

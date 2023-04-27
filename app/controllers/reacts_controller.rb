@@ -81,5 +81,7 @@ class ReactsController < ApplicationController
         reactNum: react_num,
         reactPostID: post.id
       })
+
+      current_user.send_notification(notification)
     end
 end

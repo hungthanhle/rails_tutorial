@@ -117,6 +117,11 @@ class User < ApplicationRecord
     passive_relationships.joins(:follower).where(time).pluck("users.name AS name","relationships.created_at AS created_at")
   end
 
+  # Sends notification.
+  def send_notification(notification)
+    UserMailer.notification(notification).deliver_now
+  end
+
   private
     # Converts email to all lower-case.
     def downcase_email
