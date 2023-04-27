@@ -38,12 +38,11 @@ document.addEventListener('turbo:load',()=>{
 
 function formatTime(time) {
   let formatTime = new Date(time)
-  let month = formatTime.getUTCMonth();
   let year = formatTime.getUTCFullYear();
-  let date = formatTime.getUTCDate();
-  let hours = formatTime.getUTCHours();
-  hours = ("0" + hours).slice(-2);
-  let minutes = formatTime.getUTCMinutes();
+  let month = ("0"+ (formatTime.getUTCMonth() + 1)).slice(-2);
+  let date = ("0"+ formatTime.getUTCDate()).slice(-2);
+  let hours = ("0"+ formatTime.getUTCHours()).slice(-2);
+  let minutes = ("0"+ formatTime.getUTCMinutes()).slice(-2);
 
   return `${year}-${month}-${date} ${hours}:${minutes} UTC`;
 }
