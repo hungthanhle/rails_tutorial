@@ -5,14 +5,7 @@ class ApplicationCable::ConnectionTest < ActionCable::Connection::TestCase
     @user = users(:michael)
     @other_user = users(:archer)
   end
-
-  # test "connect" do
-  #   = a || b
-  #   cookies.encrypted["user_id"] = @user.id
-  #   connect
-  #   assert_equal connection.current_user.id, @user.id
-  # end
-
+  
   test "connect" do
     connect session: {user_id: @user.id}
     assert_equal connection.current_user.id, @user.id
