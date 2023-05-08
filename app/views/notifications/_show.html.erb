@@ -1,21 +1,34 @@
 <li id = "notifications">
   <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+    <% if num_noti_not_read > 0 %>
+      <div id="notification-number"><%= num_noti_not_read %></div>
+    <% end %>
     <i class="glyphicon glyphicon-bell"></i>
   </a>
   
   <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
-    
     <div class="notification-heading"><h4 class="menu-title">Notifications</h4><h4 class="menu-title pull-right">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
     </div>
     <li class="divider"></li>
-  <div class="notifications-wrapper">
-    <% notifications.each do |notification| %>
-      <div class="notification-item">
-        <h4 class="item-title">Lúc <%= notification.created_at.strftime("%Y-%m-%d %H:%M") %> UTC</h4>
-        <p class="item-info"><%= notification.content %></p>
-      </div>
-    <% end %>
-  </div>
+    <div class="notifications-wrapper">
+      <% notifications.each do |notification| %>
+        <% if notification.read %>
+          <a href=<%= notification.notification_info %>>
+            <div class="notification-read-item notification-item">
+              <h4 class="item-title">Lúc <%= notification.created_at.strftime("%Y-%m-%d %H:%M") %> UTC</h4>
+              <p class="item-info"><%= notification.content %></p>
+            </div>
+          </a>
+        <% else %>
+          <a href=<%= notification.notification_info %>>
+            <div class="notification-not-read-item notification-item">
+              <h4 class="item-title">Lúc <%= notification.created_at.strftime("%Y-%m-%d %H:%M") %> UTC</h4>
+              <p class="item-info"><%= notification.content %></p>
+            </div>
+          </a>
+        <% end %>
+      <% end %>
+    </div>
     <li class="divider"></li>
     <div class="notification-footer"><h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4></div>
   </ul>

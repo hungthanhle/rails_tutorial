@@ -35,6 +35,10 @@ class MicropostsController < ApplicationController
   def show
     @micropost = Micropost.find_by id: params[:id], micropost_id: nil
     @user = User.find(@micropost.user_id) #
+    if params[:page] && params[:per_page]
+      params[:page] = params[:page].to_i
+      params[:per_page] = params[:per_page].to_i
+    end
     @comments = Micropost.where(micropost_id: params[:id]).page(params[:page]).per_page(params[:per_page] || 4)
     @react = React.find_by micropost_id: params[:id], user_id: current_user.id
     @comment = Micropost.new
@@ -55,7 +59,12 @@ class MicropostsController < ApplicationController
         post = Micropost.find_by id: @micropost.micropost_id, micropost_id: nil
         content = "#{current_user.name} đã comment tại post #{post.content}"
         notification = Notification.create(user_id: post.user_id, notice_type: "comment", notification_with_id: @micropost.id, content: content)
-        ActionCable.server.broadcast("notification_channel_#{notification.user_id}", notification)
+        notiNotReadNum = Notification.where(user_id: post.user_id, read: false).count
+        ActionCable.server.broadcast("notification_channel_#{notification.user_id}", {
+          **notification.as_json,
+          "notiNotReadNum"=> notiNotReadNum,
+          "href"=>notification.notification_info
+        })
         
         # current_user.send_notification(notification)
       end

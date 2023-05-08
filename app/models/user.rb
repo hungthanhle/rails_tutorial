@@ -122,6 +122,10 @@ class User < ApplicationRecord
     UserMailer.notification(notification).deliver_now
   end
 
+  def num_noti_not_read
+    notifications.where(read: false).count
+  end
+
   private
     # Converts email to all lower-case.
     def downcase_email

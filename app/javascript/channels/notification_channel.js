@@ -16,10 +16,18 @@ document.addEventListener('turbo:load',()=>{
       // Called when there's incoming data on the websocket for this channel
       // NOTIFICATION
       $('.notifications-wrapper').prepend(
-        `<div class="notification-item">
+        `<a href=${data.href}>
+        <div class="notification-not-read-item notification-item">
           <h4 class="item-title">Lúc ${formatTime(data.created_at)}</h4>
           <p class="item-info">${data.content}</p>
-        </div>`);
+        </div>
+        </a>`);
+
+      if($(`#notification-number`).length > 0){
+        $(`#notification-number`).replaceWith(`<div id="notification-number">${data.notiNotReadNum}</div>`)
+      }else {
+        $(`#dLabel`).prepend(`<div id="notification-number">${data.notiNotReadNum}</div>`)
+      }
       
       // REACT
       if(data.reactNum){
