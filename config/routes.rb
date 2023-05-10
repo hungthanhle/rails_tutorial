@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  patch 'notifications/read', to: 'notifications#read'
   get 'users/bulk_download'
   # get 'password_resets/new'
   # get 'password_resets/edit'
