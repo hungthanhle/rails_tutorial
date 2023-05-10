@@ -17,7 +17,7 @@ document.addEventListener('turbo:load',()=>{
       // NOTIFICATION
       $('.notifications-wrapper').prepend(
         `<a href=${data.href}>
-        <div class="notification-not-read-item notification-item">
+        <div class="notification-not-checked-item notification-item">
           <h4 class="item-title">Lúc ${formatTime(data.created_at)}</h4>
           <p class="item-info">${data.content}</p>
         </div>

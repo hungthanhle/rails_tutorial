@@ -19,20 +19,16 @@
     <div class="notifications-wrapper">
       <% notifications.each do |notification| %>
         <% if notification.read %>
-          <a href=<%= notification.notification_info %>>
-            <div class="notification-read-item notification-item">
-              <h4 class="item-title">Lúc <%= notification.created_at.strftime("%Y-%m-%d %H:%M") %> UTC</h4>
-              <p class="item-info"><%= notification.content %></p>
-            </div>
-          </a>
+          <% checked = "notification-checked-item" %>
         <% else %>
-          <a href=<%= notification.notification_info %>>
-            <div class="notification-not-read-item notification-item">
-              <h4 class="item-title">Lúc <%= notification.created_at.strftime("%Y-%m-%d %H:%M") %> UTC</h4>
-              <p class="item-info"><%= notification.content %></p>
-            </div>
-          </a>
+          <% checked = "notification-not-checked-item" %>
         <% end %>
+        <a href=<%= notification.notification_info %>>
+          <div class="<%=checked%> notification-item">
+            <h4 class="item-title">Lúc <%= notification.created_at.strftime("%Y-%m-%d %H:%M") %> UTC</h4>
+            <p class="item-info"><%= notification.content %></p>
+          </div>
+        </a>
       <% end %>
     </div>
     <li class="divider"></li>
