@@ -33,6 +33,7 @@ class MicropostsController < ApplicationController
   end
 
   def show
+    notification_check
     @micropost = Micropost.find_by id: params[:id], micropost_id: nil
     @user = User.find(@micropost.user_id) #
     if params[:page] && params[:per_page]
@@ -67,6 +68,13 @@ class MicropostsController < ApplicationController
         })
         
         # current_user.send_notification(notification)
+      end
+    end
+
+    def notification_check
+      notification = Notification.find_by id: params[:notif_id]
+      if notification && current_user.id == notification.user_id
+        notification.update(checked: true)
       end
     end
 end

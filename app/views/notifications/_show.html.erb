@@ -22,7 +22,7 @@
     <li class="divider"></li>
     <div class="notifications-wrapper">
       <% notifications.each do |notification| %>
-        <% if notification.read %>
+        <% if notification.checked %>
           <% checked = "notification-checked-item" %>
         <% else %>
           <% checked = "notification-not-checked-item" %>

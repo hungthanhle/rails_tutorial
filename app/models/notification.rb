@@ -9,11 +9,11 @@ class Notification < ApplicationRecord
       react = React.find(notification_with_id)
       if react.micropost.micropost_id.nil?
         #post
-        return "/microposts/#{react.micropost.id}"
+        return "/microposts/#{react.micropost.id}?notif_id=#{id}"
       else
         #comment
         position = Micropost.where("micropost_id = ? AND created_at >= ?", react.micropost.micropost_id, react.micropost.created_at).count
-        return "/microposts/#{react.micropost.micropost_id}?page=#{position}&per_page=1"
+        return "/microposts/#{react.micropost.micropost_id}?page=#{position}&per_page=1&notif_id=#{id}"
       end
     end
 
@@ -22,7 +22,7 @@ class Notification < ApplicationRecord
       if !comment.micropost_id.nil?
         #comment
         position = Micropost.where("micropost_id = ? AND created_at >= ?", comment.micropost_id, comment.created_at).count
-        return "/microposts/#{comment.micropost_id}?page=#{position}&per_page=1"
+        return "/microposts/#{comment.micropost_id}?page=#{position}&per_page=1&notif_id=#{id}"
       end
     end
   end
