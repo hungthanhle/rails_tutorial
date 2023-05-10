@@ -26,7 +26,18 @@ document.addEventListener('turbo:load',()=>{
       if($(`#notification-number`).length > 0){
         $(`#notification-number`).replaceWith(`<div id="notification-number">${data.notiNotReadNum}</div>`)
       }else {
-        $(`#dLabel`).prepend(`<div id="notification-number">${data.notiNotReadNum}</div>`)
+        // $(`.glyphicon`).remove()
+        // $(`#dLabel`).prepend()
+        $(`#dLabel`).replaceWith(
+          `<a>
+            <div id="notification-number">${data.notiNotReadNum}</div>
+            <form class="button_to" method="post" action="/notifications/read">
+              <input type="hidden" name="_method" value="patch" autocomplete="off">
+              <button id="bell-num" type="submit">
+                <i class="glyphicon glyphicon-bell"></i>
+              </button>
+            </form>
+          </a>`)
       }
       
       // REACT
