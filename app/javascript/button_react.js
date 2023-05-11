@@ -24,7 +24,8 @@ function createReact (emotion, micropost_id) {
   
   form.style.display = 'hidden';
   document.body.appendChild(form)
-  form.submit();
+  form.requestSubmit();
+  document.body.removeChild(document.body.lastChild);
 }
 
 function updateReact (emotion, micropost_id, react_id) {
@@ -61,7 +62,8 @@ function updateReact (emotion, micropost_id, react_id) {
   
   form.style.display = 'hidden';
   document.body.appendChild(form)
-  form.submit();
+  form.requestSubmit();
+  document.body.removeChild(document.body.lastChild);
 }
 
 function destroyReact (emotion, micropost_id, react_id) {
@@ -98,7 +100,8 @@ function destroyReact (emotion, micropost_id, react_id) {
   
   form.style.display = 'hidden';
   document.body.appendChild(form)
-  form.submit();
+  form.requestSubmit();
+  document.body.removeChild(document.body.lastChild);
 }
 
 function CSRFToken(form){
