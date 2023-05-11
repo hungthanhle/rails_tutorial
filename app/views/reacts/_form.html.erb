@@ -3,33 +3,27 @@
   <% react = React.new %>
   <figure id=<%="#{dom_id(post)}_form"%>>
     <h3 class='reactNum' >React (<%= post.reacts.count %>)</h3>
-
-    <%# button onlcick: change input value AND submit %>
-    <button type="button" onclick="proceed();">do</button>
-    
-    <% arr.each do |e| %>
-      <%= button_to image_submit_tag("create_#{e}.png", :class => "#{e} emoji"), 
-        react, params: {react:{emotion: e, micropost_id: post.id}}, 
-        class: "btn-emoji", id: "#{e}_#{dom_id(react)}_#{dom_id(post)}_create_form" 
-      %>
-    <%end %>
+    <div class="reacts-block">
+      <% arr.each do |e| %>
+        <% emotion = "'#{e}'"%>
+        <img src="/assets/create_<%= e %>.png" class="<%= e %> emoji" onclick="createReact(<%= emotion %>,<%= post.id %>);">
+      <%end %>
+    </div>
   </figure>
 <% else %>
   <figure id=<%="#{dom_id(post)}_form"%>>
     <h3 class='reactNum' >React (<%= post.reacts.count %>)</h3>
-    <% arr.each do |e| %>
-      <% if e == react.emotion %>
-        <%= button_to image_submit_tag("destroy_#{e}.png", :class => "#{e} emoji"), 
-          react, method: :delete, params: {react:{emotion: e, micropost_id: post.id}}, 
-          class: "btn-emoji", id: "#{e}_#{dom_id(react)}_#{dom_id(post)}_create_form" 
-        %>
-      <% else %>
-        <%= button_to image_submit_tag("create_#{e}.png", :class => "#{e} emoji"), 
-          react, params: {react:{emotion: e, micropost_id: post.id}}, 
-          class: "btn-emoji", id: "#{e}_#{dom_id(react)}_#{dom_id(post)}_create_form" 
-        %>
-      <% end %>
-    <%end %>
+    <div class="reacts-block">
+      <% arr.each do |e| %>
+        <% if e == react.emotion %>
+          <% emotion = "'#{e}'"%>
+          <img src="/assets/destroy_<%= e %>.png" class="<%= e %> emoji" onclick="destroyReact(<%= emotion %>,<%= post.id %>,<%= react.id %>);">
+        <% else %>
+          <% emotion = "'#{e}'"%>
+          <img src="/assets/create_<%= e %>.png" class="<%= e %> emoji" onclick="updateReact(<%= emotion %>,<%= post.id %>,<%= react.id %>);">
+        <% end %>
+      <%end %>
+    </div>
   </figure>
 <% end %>
 
