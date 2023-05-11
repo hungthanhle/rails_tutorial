@@ -5,11 +5,7 @@
     <h3 class='reactNum' >React (<%= post.reacts.count %>)</h3>
 
     <%# button onlcick: change input value AND submit %>
-    <form name="myform" method="post" action="/reacts" onsubmit="DoSubmit();">
-      <input type="hidden" name="myinput" id="myinput" value="0" />
-      <input type="text" name="message" value="" />
-      <input type="submit" name="submit" />
-    </form>
+    <button type="button" onclick="proceed();">do</button>
     
     <% arr.each do |e| %>
       <%= button_to image_submit_tag("create_#{e}.png", :class => "#{e} emoji"), 
