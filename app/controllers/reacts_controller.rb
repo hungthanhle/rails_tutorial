@@ -61,6 +61,7 @@ class ReactsController < ApplicationController
 
   private
     def react_params
+      binding.b #test params value (be changed by JS)
       params.require(:react).permit(:emotion, :micropost_id)
     end
 

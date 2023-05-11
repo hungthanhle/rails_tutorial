@@ -3,6 +3,14 @@
   <% react = React.new %>
   <figure id=<%="#{dom_id(post)}_form"%>>
     <h3 class='reactNum' >React (<%= post.reacts.count %>)</h3>
+
+    <%# button onlcick: change input value AND submit %>
+    <form name="myform" method="post" action="/reacts" onsubmit="DoSubmit();">
+      <input type="hidden" name="myinput" id="myinput" value="0" />
+      <input type="text" name="message" value="" />
+      <input type="submit" name="submit" />
+    </form>
+    
     <% arr.each do |e| %>
       <%= button_to image_submit_tag("create_#{e}.png", :class => "#{e} emoji"), 
         react, params: {react:{emotion: e, micropost_id: post.id}}, 
@@ -28,3 +36,5 @@
     <%end %>
   </figure>
 <% end %>
+
+<%= javascript_include_tag 'button_react.js' %>
