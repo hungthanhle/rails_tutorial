@@ -1,7 +1,6 @@
 class ReactsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user, only: [:destroy, :update]
-  # skip_before_action :verify_authenticity_token
 
   def create
     @react = current_user.reacts.build(react_params)
@@ -18,7 +17,9 @@ class ReactsController < ApplicationController
           end     
         }
       else
-        redirect_to request.referrer, status: :unprocessable_entity
+        format.html{
+          redirect_to request.referrer, status: :unprocessable_entity
+        }
       end
     end
   end

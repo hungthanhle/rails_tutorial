@@ -1,30 +1,27 @@
 <% arr = ["like", "love", "haha", "wow", "sad", "angry"]%>
 <% if react.nil? %>
   <% react = React.new %>
-  <figure id=<%="#{dom_id(post)}_form"%>>
-    <h3 class='reactNum' >React (<%= post.reacts.count %>)</h3>
-    <div class="reacts-block">
-      <% arr.each do |e| %>
-        <% emotion = "'#{e}'"%>
-        <img src="/assets/create_<%= e %>.png" class="<%= e %> emoji" onclick="createReact(<%= emotion %>,<%= post.id %>);">
-      <%end %>
-    </div>
-  </figure>
-<% else %>
-  <figure id=<%="#{dom_id(post)}_form"%>>
-    <h3 class='reactNum' >React (<%= post.reacts.count %>)</h3>
-    <div class="reacts-block">
+<% end %>
+
+<%= form_with id: "#{dom_id(post)}_form", model: react do |form| %>
+  <% formID = "'#{dom_id(post)}_form'" %>
+  <h3 class='reactNum' >React (<%= post.reacts.count %>)</h3>
+  <%= form.hidden_field :micropost_id, value: post.id %>
+  <%= form.hidden_field :emotion, class: "emoji-value" %>
+  <div class="reacts-block">
+      <%# <%= form.submit.to_s.split(" ").select {|attr| attr.include?("value=") } %>
       <% arr.each do |e| %>
         <% if e == react.emotion %>
           <% emotion = "'#{e}'"%>
-          <img src="/assets/destroy_<%= e %>.png" class="<%= e %> emoji" onclick="destroyReact(<%= emotion %>,<%= post.id %>,<%= react.id %>);">
+          <%= link_to react, data: { "turbo-method": :delete } do %>
+            <img src="/assets/destroy_<%= e %>.png" class="<%= e %> emoji">
+          <% end %>
         <% else %>
           <% emotion = "'#{e}'"%>
-          <img src="/assets/create_<%= e %>.png" class="<%= e %> emoji" onclick="updateReact(<%= emotion %>,<%= post.id %>,<%= react.id %>);">
+          <img src="/assets/create_<%= e %>.png" class="<%= e %> emoji" onclick="addValueForm(<%= formID %>, <%= emotion %>);">
         <% end %>
       <%end %>
-    </div>
-  </figure>
+  </div>
 <% end %>
 
 <%= javascript_include_tag 'button_react.js' %>
