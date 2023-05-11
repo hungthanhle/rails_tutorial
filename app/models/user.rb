@@ -9,6 +9,7 @@ class User < ApplicationRecord
   before_create :create_activation_digest #called a method reference
 
   has_many :reacts, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   validates(:name, presence: true, length: { maximum: 50 })
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -114,6 +115,15 @@ class User < ApplicationRecord
 
   def my_followers_and_time(time)
     passive_relationships.joins(:follower).where(time).pluck("users.name AS name","relationships.created_at AS created_at")
+  end
+
+  # Sends notification.
+  def send_notification(notification)
+    UserMailer.notification(notification).deliver_now
+  end
+
+  def num_noti_not_read
+    notifications.where(read: false).count
   end
 
   private

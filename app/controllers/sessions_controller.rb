@@ -28,7 +28,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out if logged_in?
+    if logged_in?
+      ActionCable.server.remote_connections.where(current_user: current_user).disconnect
+      log_out
+    end
     redirect_to root_path
   end
 

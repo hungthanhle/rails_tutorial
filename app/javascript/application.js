@@ -2,3 +2,10 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "bootstrap"
+import "channels"
+
+Notification.requestPermission().then(function(result){
+  if(result.permisssion == 'denied'){
+    
+  }
+})

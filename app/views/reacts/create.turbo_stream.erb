@@ -1,3 +1,7 @@
 <%= turbo_stream.replace "#{dom_id(@react.micropost)}_form" do %>
   <%= render "form", react: @react, post: @react.micropost %>
 <% end %>
+
+<%# <%= turbo_stream.replace "notifications" do %>
+  <%# <%= render "notifications/show", notifications: current_user.notifications %>
+<%# <% end %>

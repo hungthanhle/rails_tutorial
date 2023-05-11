@@ -1,0 +1,41 @@
+<li id = "notifications" class = "<%=defined?(show)&&show%>">
+  <%# <%= link_to '/notifications/read', { id: "dLabel", class: "btn btn-light", 'data-toggle': "dropdown", 'role': "button" }, data: { turbo_method: "patch" } do %>
+  <% if num_noti_not_read > 0 %>
+    <a>
+      <div id="notification-number"><%= num_noti_not_read %></div>
+      <%= button_to '/notifications/read', id: "bell-num", :method => :patch do %>
+        <i class="glyphicon glyphicon-bell"></i>
+      <% end %>
+    </a>
+  <% else %>
+    <a id="dLabel" role="button" data-toggle="dropdown">
+      <i class="glyphicon glyphicon-bell"></i>
+    </a>
+  <% end %>
+  
+  <ul class="dropdown-menu notifications <%=defined?(show)&&show%>" role="menu" aria-labelledby="dLabel">
+    <div class="notification-heading">
+      <h4 class="menu-title">Notifications</h4>
+      <h4 class="menu-title pull-right">
+      </h4>
+    </div>
+    <li class="divider"></li>
+    <div class="notifications-wrapper">
+      <% notifications.each do |notification| %>
+        <% if notification.checked %>
+          <% checked = "notification-checked-item" %>
+        <% else %>
+          <% checked = "notification-not-checked-item" %>
+        <% end %>
+        <a href=<%= notification.notification_info %>>
+          <div class="<%=checked%> notification-item">
+            <h4 class="item-title">Lúc <%= notification.created_at.strftime("%Y-%m-%d %H:%M") %> UTC</h4>
+            <p class="item-info"><%= notification.content %></p>
+          </div>
+        </a>
+      <% end %>
+    </div>
+    <li class="divider"></li>
+    <div class="notification-footer"><h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4></div>
+  </ul>
+</li>

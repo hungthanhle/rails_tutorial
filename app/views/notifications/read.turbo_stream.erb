@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "notifications" do %>
+  <%= render "notifications/show", notifications: current_user.notifications.first(10), num_noti_not_read: current_user.num_noti_not_read, show: "show" %>
+<% end %>
