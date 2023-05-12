@@ -14,7 +14,8 @@
     </section>
     <section class="user_info">
       <span class="timestamp">
-        <%= I18n.t("post.at_time") + ' ' + I18n.l(@micropost.created_at)%><br>
+        <%# Time.zone.to_s %>
+        <%= I18n.t("post.at_time") + ' ' + I18n.l(@micropost.created_at.getlocal) %><br>
         <% if current_user?(@micropost.user) %>
           <%= button_to I18n.t("post.delete"), @micropost, method: :delete, data: { confirm: "You sure?" } %>
         <% end %>

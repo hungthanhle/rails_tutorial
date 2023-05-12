@@ -20,5 +20,8 @@ module SampleApp
     # config.eager_load_paths << Rails.root.join("extras")
     config.i18n.available_locales = [:en, :vi]
     config.i18n.default_locale = :en
+    
+    config.time_zone = "UTC"
+    config.active_record.default_timezone = :utc
   end
 end

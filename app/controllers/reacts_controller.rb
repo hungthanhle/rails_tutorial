@@ -74,7 +74,7 @@ class ReactsController < ApplicationController
 
     def notification_react
       post = @react.micropost
-      content = "#{current_user.name} đã react tại #{post.content}"
+      content = "#{current_user.name} -- react -- #{post.content}"
       notification = Notification.create(user_id: post.user_id, notice_type: "react", notification_with_id: @react.id, content: content)
       react_num = post.reacts.count
       notiNotReadNum = Notification.where(user_id: post.user_id, read: false).count
@@ -84,7 +84,8 @@ class ReactsController < ApplicationController
         reactNum: react_num,
         reactPostID: post.id,
         notiNotReadNum: notiNotReadNum,
-        href: notification.notification_info
+        href: notification.notification_info,
+        # time_notification: I18n.t("post.at_time") + ' ' + I18n.l(notification.created_at.getlocal, format: :noti_time) #timezone of sender
       })
       
       # current_user.send_notification(notification)

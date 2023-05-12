@@ -15,7 +15,7 @@
   
   <ul class="dropdown-menu notifications <%=defined?(show)&&show%>" role="menu" aria-labelledby="dLabel">
     <div class="notification-heading">
-      <h4 class="menu-title">Notifications</h4>
+      <h4 class="menu-title"><%=I18n.t("notifications.title")%></h4>
       <h4 class="menu-title pull-right">
       </h4>
     </div>
@@ -29,13 +29,13 @@
         <% end %>
         <a href=<%= notification.notification_info %>>
           <div class="<%=checked%> notification-item">
-            <h4 class="item-title">Lúc <%= notification.created_at.strftime("%Y-%m-%d %H:%M") %> UTC</h4>
+            <h4 class="item-title"><%= I18n.t("post.at_time") + ' ' + I18n.l(notification.created_at.getlocal, format: :noti_time) %></h4>
             <p class="item-info"><%= notification.content %></p>
           </div>
         </a>
       <% end %>
     </div>
     <li class="divider"></li>
-    <div class="notification-footer"><h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4></div>
+    <div class="notification-footer"><h4 class="menu-title"><%=I18n.t("notifications.view")%><i class="glyphicon glyphicon-circle-arrow-right"></i></h4></div>
   </ul>
 </li>
