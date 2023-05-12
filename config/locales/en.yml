@@ -52,5 +52,38 @@ en:
     contact: Contact
     news: News
 
-  application:
-    help: Help
+  post:
+    comment: Comment
+    comment_guide: Compose new comment...
+    delete: Delete
+    at_time: At 
+    read_more: Read more ...
+    title: Post
+    post_guide: Compose new micropost...
+    create_post: Post
+
+  user:
+    view: view my profile
+    delete: Delete
+
+  feed: Micropost Feed
+
+  login:
+    title: Log In
+    signup: Sign up now!
+    signup_more: New user?
+    signin_more: Sign in with
+
+  datetime: &datetime
+  month_names:
+    [~, January, February, March, April, May, June, July, August, September, October, November, December]
+  formats:
+      default: "%d/%m/%Y"
+      short: "%d/%m/%Y"
+      day_month: "%d/%m"
+
+  date:
+    <<: *datetime
+
+  time:
+    <<: *datetime

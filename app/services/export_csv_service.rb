@@ -4,7 +4,7 @@ class ExportCsvService
   def initialize objects, attributes
     @attributes = attributes
     @objects = objects
-    @header = attributes.map { |attr| I18n.t("header_csv.#{attr}") } #
+    @header = attributes.map { |attr| I18n.t("header_csv.#{attr}") }
   end
 
   def perform_object

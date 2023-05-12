@@ -6,7 +6,7 @@ vi:
     help: Hỗ trợ
     users: Người dùng
     account: Tài khoản
-    profile: Hồ sơ
+    profile: Trang cá nhân
     settings: Cài đặt
     logout: Đăng xuất
     login: Đăng nhập
@@ -14,5 +14,38 @@ vi:
     contact: Liên hệ
     news: Tin tức
 
-  # application:
-  #   help: Hỗ trợ
+  post:
+    comment: Bình luận
+    comment_guide: Viết bình luận...
+    delete: Xóa
+    at_time: Lúc 
+    read_more: Đọc thêm ...
+    title: Bài đăng
+    post_guide: Viết bài đăng...
+    create_post: Đăng
+
+  user:
+    view: Trang cá nhân
+    delete: Xóa
+
+  feed: Bảng tin
+
+  login:
+    title: Đăng nhập
+    signup: Đăng ký
+    signup_more: Người dùng mới ?
+    signin_more: Hoặc đăng nhập bằng
+
+  datetime: &datetime
+    month_names:
+      [~, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    formats:
+       default: "%d/%m/%Y"
+       short: "%d/%m/%Y"
+       day_month: "%d/%m"
+
+  date:
+    <<: *datetime
+
+  time:
+    <<: *datetime

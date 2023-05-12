@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  # before_action :set_locale
   around_action :switch_locale
 
   include SessionsHelper
@@ -17,11 +16,6 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    # def set_locale
-    #   I18n.locale = params[:locale] || I18n.default_locale
-    # end
-
-    # locale for next url
     def default_url_options
       {locale: I18n.locale}
     end

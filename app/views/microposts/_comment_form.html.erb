@@ -2,7 +2,7 @@
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
     <%= f.hidden_field :micropost_id, value: post.id %>
-    <%= f.text_area :content, placeholder: "Compose new comment..." %>
+    <%= f.text_area :content, placeholder: I18n.t("post.comment_guide") %>
   </div>
-  <%= f.submit "Comment", class: "btn btn-primary" %>
+  <%= f.submit I18n.t("post.comment"), class: "btn btn-primary" %>
 <% end %>

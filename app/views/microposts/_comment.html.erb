@@ -6,9 +6,9 @@
     <%= image_tag comment.image if comment.image.attached? %>
   </span>
   <span class="timestamp">
-    Posted <%= time_ago_in_words(comment.created_at) %> ago.<br>
+    <%= I18n.t("post.at_time") + ' ' + I18n.l(comment.created_at)%><br>
     <% if current_user?(comment.user) %>
-      <%= button_to "delete", comment, method: :delete, data: { confirm: "You sure?" } %>
+      <%= button_to I18n.t("post.delete"), comment, method: :delete, data: { confirm: "You sure?" } %>
     <% end %>
     <% reacted = comment.reacts.find_by user_id: current_user.id %>
     <%= render :partial => 'reacts/form', :locals => {:react => reacted, :post => comment} if logged_in? %>
