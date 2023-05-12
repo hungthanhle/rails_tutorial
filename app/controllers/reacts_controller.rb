@@ -17,7 +17,9 @@ class ReactsController < ApplicationController
           end     
         }
       else
-        redirect_to request.referrer, status: :unprocessable_entity
+        format.html{
+          redirect_to request.referrer, status: :unprocessable_entity
+        }
       end
     end
   end

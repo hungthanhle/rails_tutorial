@@ -1,30 +1,27 @@
 <% arr = ["like", "love", "haha", "wow", "sad", "angry"]%>
 <% if react.nil? %>
   <% react = React.new %>
-  <figure id=<%="#{dom_id(post)}_form"%>>
-    <h3 class='reactNum' >React (<%= post.reacts.count %>)</h3>
-    <% arr.each do |e| %>
-      <%= button_to image_submit_tag("create_#{e}.png", :class => "#{e} emoji"), 
-        react, params: {react:{emotion: e, micropost_id: post.id}}, 
-        class: "btn-emoji", id: "#{e}_#{dom_id(react)}_#{dom_id(post)}_create_form" 
-      %>
-    <%end %>
-  </figure>
-<% else %>
-  <figure id=<%="#{dom_id(post)}_form"%>>
-    <h3 class='reactNum' >React (<%= post.reacts.count %>)</h3>
-    <% arr.each do |e| %>
-      <% if e == react.emotion %>
-        <%= button_to image_submit_tag("destroy_#{e}.png", :class => "#{e} emoji"), 
-          react, method: :delete, params: {react:{emotion: e, micropost_id: post.id}}, 
-          class: "btn-emoji", id: "#{e}_#{dom_id(react)}_#{dom_id(post)}_create_form" 
-        %>
-      <% else %>
-        <%= button_to image_submit_tag("create_#{e}.png", :class => "#{e} emoji"), 
-          react, params: {react:{emotion: e, micropost_id: post.id}}, 
-          class: "btn-emoji", id: "#{e}_#{dom_id(react)}_#{dom_id(post)}_create_form" 
-        %>
-      <% end %>
-    <%end %>
-  </figure>
 <% end %>
+
+<%= form_with id: "#{dom_id(post)}_form", model: react do |form| %>
+  <% formID = "'#{dom_id(post)}_form'" %>
+  <h3 class='reactNum' >React (<%= post.reacts.count %>)</h3>
+  <%= form.hidden_field :micropost_id, value: post.id %>
+  <%= form.hidden_field :emotion, class: "emoji-value" %>
+  <div class="reacts-block">
+      <%# <%= form.submit.to_s.split(" ").select {|attr| attr.include?("value=") } %>
+      <% arr.each do |e| %>
+        <% if e == react.emotion %>
+          <% emotion = "'#{e}'"%>
+          <%= link_to react, data: { "turbo-method": :delete } do %>
+            <img src="/assets/destroy_<%= e %>.png" class="<%= e %> emoji">
+          <% end %>
+        <% else %>
+          <% emotion = "'#{e}'"%>
+          <img src="/assets/create_<%= e %>.png" class="<%= e %> emoji" onclick="addValueForm(<%= formID %>, <%= emotion %>);">
+        <% end %>
+      <%end %>
+  </div>
+<% end %>
+
+<%= javascript_include_tag 'button_react.js' %>
