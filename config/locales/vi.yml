@@ -1,0 +1,18 @@
+vi:
+  hello: "Hello world"
+
+  layouts:
+    home: Trang chủ
+    help: Hỗ trợ
+    users: Người dùng
+    account: Tài khoản
+    profile: Hồ sơ
+    settings: Cài đặt
+    logout: Đăng xuất
+    login: Đăng nhập
+    about: Về chúng tôi
+    contact: Liên hệ
+    news: Tin tức
+
+  # application:
+  #   help: Hỗ trợ

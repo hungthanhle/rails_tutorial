@@ -38,3 +38,19 @@ en:
     content: Post
     created_at: Date
     created_at_vn: Ngày
+
+  layouts:
+    home: Home
+    help: Help
+    users: Users
+    account: Account
+    profile: Profile
+    settings: Settings
+    logout: Log out
+    login: Log in
+    about: About
+    contact: Contact
+    news: News
+
+  application:
+    help: Help
