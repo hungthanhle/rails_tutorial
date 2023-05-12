@@ -64,8 +64,7 @@ class MicropostsController < ApplicationController
         ActionCable.server.broadcast("notification_channel_#{notification.user_id}", {
           **notification.as_json,
           "notiNotReadNum"=> notiNotReadNum,
-          "href"=>notification.notification_info,
-          # "time_notification"=>I18n.t("post.at_time") + ' ' + I18n.l(notification.created_at.getlocal, format: :noti_time) #timezone of sender
+          "href"=> notification.notification_info(current_user)
         })
         
         # current_user.send_notification(notification)

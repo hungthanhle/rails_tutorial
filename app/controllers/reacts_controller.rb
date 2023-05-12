@@ -84,8 +84,7 @@ class ReactsController < ApplicationController
         reactNum: react_num,
         reactPostID: post.id,
         notiNotReadNum: notiNotReadNum,
-        href: notification.notification_info,
-        # time_notification: I18n.t("post.at_time") + ' ' + I18n.l(notification.created_at.getlocal, format: :noti_time) #timezone of sender
+        href: notification.notification_info(current_user)
       })
       
       # current_user.send_notification(notification)

@@ -27,7 +27,7 @@
         <% else %>
           <% checked = "notification-not-checked-item" %>
         <% end %>
-        <a href=<%= notification.notification_info %>>
+        <a href=<%= notification.notification_info current_user %>>
           <div class="<%=checked%> notification-item">
             <h4 class="item-title"><%= I18n.t("post.at_time") + ' ' + I18n.l(notification.created_at.getlocal, format: :noti_time) %></h4>
             <p class="item-info"><%= notification.content %></p>
