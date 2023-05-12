@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
 
     def switch_locale(&action)
       locale = available_locale
+      current_user.set_locale locale if !locale.nil?
       I18n.with_locale(locale, &action)
     end
 

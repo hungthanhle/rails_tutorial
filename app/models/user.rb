@@ -126,6 +126,22 @@ class User < ApplicationRecord
     notifications.where(read: false).count
   end
 
+  # 1.
+  # def set_locale locale
+  #   @locale = locale
+  # end
+
+  # def get_locale
+  #   @locale
+  # end
+
+  # 2.
+  # attribute :locale, :string
+
+  def set_locale locale
+    update_attribute(:locale, locale)
+  end
+
   private
     # Converts email to all lower-case.
     def downcase_email
