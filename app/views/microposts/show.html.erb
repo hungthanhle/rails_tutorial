@@ -1,4 +1,4 @@
-<% provide(:title, "Post #{@micropost.id}") %>
+<% provide(:title, "#{I18n.t("post.title")} #{@micropost.id}") %>
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
@@ -14,9 +14,10 @@
     </section>
     <section class="user_info">
       <span class="timestamp">
-        Posted at <%= @micropost.created_at %>.
+        <%# Time.zone.to_s %>
+        <%= I18n.t("post.at_time") + ' ' + I18n.l(@micropost.created_at.getlocal) %><br>
         <% if current_user?(@micropost.user) %>
-          <%= button_to "delete", @micropost, method: :delete, data: { confirm: "You sure?" } %>
+          <%= button_to I18n.t("post.delete"), @micropost, method: :delete, data: { confirm: "You sure?" } %>
         <% end %>
       </span>
     </section>

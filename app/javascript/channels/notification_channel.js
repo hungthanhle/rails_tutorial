@@ -18,7 +18,9 @@ document.addEventListener('turbo:load',()=>{
       $('.notifications-wrapper').prepend(
         `<a href=${data.href}>
         <div class="notification-not-checked-item notification-item">
-          <h4 class="item-title">Lúc ${formatTime(data.created_at)}</h4>
+          <!-- <h4 class="item-title">Lúc ${formatTime(data.created_at)}</h4> --><!-- created_at không phải timezone -->
+          <!-- <h4 class="item-title">${data.time_notification}</h4> --><!-- sender timezone -->
+          <h4 class="item-title">${formatTime(new Date())}</h4>
           <p class="item-info">${data.content}</p>
         </div>
         </a>`);
@@ -57,11 +59,11 @@ document.addEventListener('turbo:load',()=>{
 
 function formatTime(time) {
   let formatTime = new Date(time)
-  let year = formatTime.getUTCFullYear();
-  let month = ("0"+ (formatTime.getUTCMonth() + 1)).slice(-2);
-  let date = ("0"+ formatTime.getUTCDate()).slice(-2);
-  let hours = ("0"+ formatTime.getUTCHours()).slice(-2);
-  let minutes = ("0"+ formatTime.getUTCMinutes()).slice(-2);
+  let year = formatTime.getFullYear();
+  let month = ("0"+ (formatTime.getMonth() + 1)).slice(-2);
+  let date = ("0"+ formatTime.getDate()).slice(-2);
+  let hours = ("0"+ formatTime.getHours()).slice(-2);
+  let minutes = ("0"+ formatTime.getMinutes()).slice(-2);
 
-  return `${year}-${month}-${date} ${hours}:${minutes} UTC`;
+  return `${year}-${month}-${date} ${hours}:${minutes}`;
 }

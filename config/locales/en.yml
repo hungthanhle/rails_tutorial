@@ -38,3 +38,95 @@ en:
     content: Post
     created_at: Date
     created_at_vn: Ngày
+
+  layouts:
+    home: Home
+    help: Help
+    users: Users
+    account: Account
+    profile: Profile
+    settings: Settings
+    logout: Log out
+    login: Log in
+    about: About
+    contact: Contact
+    news: News
+
+  post:
+    comment: Comment
+    comment_guide: Compose new comment...
+    delete: Delete
+    at_time: At 
+    read_more: Read more ...
+    title: Post
+    post_guide: Compose new micropost...
+    create_post: Post
+
+  user:
+    view: view my profile
+    delete: Delete
+
+  feed: Micropost Feed
+
+  login:
+    title: Log In
+    signup: Sign up now!
+    signup_more: New user?
+    signin_more: Sign in with
+
+  datetime: &datetime
+    month_names:
+      [~, January, February, March, April, May, June, July, August, September, October, November, December]
+    formats:
+        default: "%H:%M %d/%m/%Y"
+        short: "%d/%m/%Y"
+        day_month: "%d/%m"
+        noti_time: "%Y-%m-%d %H:%M"
+
+  date:
+    <<: *datetime
+
+  time:
+    <<: *datetime
+
+  time_ago:
+  datetime:
+     distance_in_words:
+       half_a_minute: "half a minute"
+       less_than_x_seconds:
+         one:   "less than 1 second"
+         other: "less than %{count} seconds"
+       x_seconds:
+         one:   "1 second"
+         other: "%{count} seconds"
+       less_than_x_minutes:
+         one:   "less than a minute"
+         other: "less than %{count} minutes"
+       x_minutes:
+         one:   "1 min"
+         other: "%{count} mins"
+       about_x_hours:
+         one:   "about 1 hour"
+         other: "about %{count} hours"
+       x_days:
+         one:   "1 day"
+         other: "%{count} days"
+       about_x_months:
+         one:   "about 1 month"
+         other: "about %{count} months"
+       x_months:
+         one:   "1 month"
+         other: "%{count} months"
+       about_x_years:
+         one:   "about 1 year"
+         other: "about %{count} years"
+       over_x_years:
+         one:   "over 1 year"
+         other: "over %{count} years"
+       almost_x_years:
+         one:   "almost 1 year"
+         other: "almost %{count} years"
+
+  notifications:
+    title: Notifications
+    view: View all

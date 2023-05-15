@@ -9,7 +9,7 @@
   <span class="timestamp">
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
     <% if current_user?(micropost.user) %>
-      <%= button_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
+      <%= button_to I18n.t("post.delete"), micropost, method: :delete, data: { confirm: "You sure?" } %>
     <% end %>
   </span>
   <% react = micropost.reacts.find_by user_id: current_user.id %>
@@ -24,6 +24,6 @@
     <%= render 'microposts/comment_form', post: micropost if logged_in? %>
   </span>
   <div class="more">
-    <%= link_to "Read more ...", micropost %>
+    <%= link_to I18n.t("post.read_more"), micropost %>
   </div>
 </li>

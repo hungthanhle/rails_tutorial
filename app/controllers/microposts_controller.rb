@@ -58,13 +58,13 @@ class MicropostsController < ApplicationController
     def notification_comment
       if !@micropost.micropost_id.nil?
         post = Micropost.find_by id: @micropost.micropost_id, micropost_id: nil
-        content = "#{current_user.name} đã comment tại post #{post.content}"
+        content = "#{current_user.name} -- comment -- post #{post.content}"
         notification = Notification.create(user_id: post.user_id, notice_type: "comment", notification_with_id: @micropost.id, content: content)
         notiNotReadNum = Notification.where(user_id: post.user_id, read: false).count
         ActionCable.server.broadcast("notification_channel_#{notification.user_id}", {
           **notification.as_json,
           "notiNotReadNum"=> notiNotReadNum,
-          "href"=>notification.notification_info
+          "href"=> notification.notification_info(current_user)
         })
         
         # current_user.send_notification(notification)

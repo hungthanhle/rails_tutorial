@@ -1,0 +1,94 @@
+vi:
+  hello: "Hello world"
+
+  layouts:
+    home: Trang chủ
+    help: Hỗ trợ
+    users: Người dùng
+    account: Tài khoản
+    profile: Trang cá nhân
+    settings: Cài đặt
+    logout: Đăng xuất
+    login: Đăng nhập
+    about: Về chúng tôi
+    contact: Liên hệ
+    news: Tin tức
+
+  post:
+    comment: Bình luận
+    comment_guide: Viết bình luận...
+    delete: Xóa
+    at_time: Lúc 
+    read_more: Đọc thêm ...
+    title: Bài đăng
+    post_guide: Viết bài đăng...
+    create_post: Đăng
+
+  user:
+    view: Trang cá nhân
+    delete: Xóa
+
+  feed: Bảng tin
+
+  login:
+    title: Đăng nhập
+    signup: Đăng ký
+    signup_more: Người dùng mới ?
+    signin_more: Hoặc đăng nhập bằng
+
+  datetime: &datetime
+    month_names:
+      [~, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    formats:
+      default: "%H:%M %d/%m/%Y"
+      short: "%d/%m/%Y"
+      day_month: "%d/%m"
+      noti_time: "%Y-%m-%d %H:%M"
+
+  date:
+    <<: *datetime
+
+  time:
+    <<: *datetime
+
+  time_ago:
+  datetime:
+     distance_in_words:
+       half_a_minute: "half a minute"
+       less_than_x_seconds:
+         one:   "less than 1 second"
+         other: "less than %{count} seconds"
+       x_seconds:
+         one:   "1 second"
+         other: "%{count} seconds"
+       less_than_x_minutes:
+         one:   "less than a minute"
+         other: "less than %{count} minutes"
+       x_minutes:
+         one:   "1 min"
+         other: "%{count} mins"
+       about_x_hours:
+         one:   "about 1 hour"
+         other: "about %{count} hours"
+       x_days:
+         one:   "1 day"
+         other: "%{count} days"
+       about_x_months:
+         one:   "about 1 month"
+         other: "about %{count} months"
+       x_months:
+         one:   "1 month"
+         other: "%{count} months"
+       about_x_years:
+         one:   "about 1 year"
+         other: "about %{count} years"
+       over_x_years:
+         one:   "over 1 year"
+         other: "over %{count} years"
+       almost_x_years:
+         one:   "almost 1 year"
+         other: "almost %{count} years"
+
+  notifications: 
+    title: Thông báo
+    view: Xem tất cả
